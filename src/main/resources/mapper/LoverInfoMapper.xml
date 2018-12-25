@@ -2,36 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nero.loverpool.dao.LoverInfoMapper">
   <resultMap id="BaseResultMap" type="com.nero.loverpool.model.LoverInfo">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="LOVERNAME" jdbcType="VARCHAR" property="lovername" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, nickname, phone, email, sex
+    LOVERNAME, nickname, phone, email, sex
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from loverinfo
-    where ID = #{id,jdbcType=VARCHAR}
+    where LOVERNAME = #{lovername,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from loverinfo
-    where ID = #{id,jdbcType=VARCHAR}
+    where LOVERNAME = #{lovername,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.nero.loverpool.model.LoverInfo">
-    insert into loverinfo (ID, nickname, phone, 
+    insert into loverinfo (LOVERNAME, nickname, phone, 
       email, sex)
-    values (#{id,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+    values (#{lovername,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nero.loverpool.model.LoverInfo">
     insert into loverinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
+      <if test="lovername != null">
+        LOVERNAME,
       </if>
       <if test="nickname != null">
         nickname,
@@ -47,8 +47,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+      <if test="lovername != null">
+        #{lovername,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null">
         #{nickname,jdbcType=VARCHAR},
@@ -80,7 +80,7 @@
         sex = #{sex,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
+    where LOVERNAME = #{lovername,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nero.loverpool.model.LoverInfo">
     update loverinfo
@@ -88,6 +88,6 @@
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
+    where LOVERNAME = #{lovername,jdbcType=VARCHAR}
   </update>
 </mapper>

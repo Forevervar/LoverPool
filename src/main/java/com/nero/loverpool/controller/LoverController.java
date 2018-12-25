@@ -24,7 +24,7 @@ public class LoverController {
 	@RequestMapping(value="/info", method=RequestMethod.POST)
 	@ResponseBody
 	private Lover queryLoverByID(@RequestBody Lover lover) {
-		logger.info("Query Lover by ID.!" + lover.getId());
+		logger.info("Query Lover by ID.!" + lover.getLovername());
 		return loverService.getLover(lover);
 	}
 }

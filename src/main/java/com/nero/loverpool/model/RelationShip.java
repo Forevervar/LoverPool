@@ -1,23 +1,23 @@
 package com.nero.loverpool.model;
 
 public class RelationShip {
-    private String boyfriendid;
+    private String boyfriendname;
 
-    private String grilfriendid;
+    private String grilfriendname;
 
-    public String getBoyfriendid() {
-        return boyfriendid;
+    public String getBoyfriendname() {
+        return boyfriendname;
     }
 
-    public void setBoyfriendid(String boyfriendid) {
-        this.boyfriendid = boyfriendid;
+    public void setBoyfriendname(String boyfriendname) {
+        this.boyfriendname = boyfriendname;
     }
 
-    public String getGrilfriendid() {
-        return grilfriendid;
+    public String getGrilfriendname() {
+        return grilfriendname;
     }
 
-    public void setGrilfriendid(String grilfriendid) {
-        this.grilfriendid = grilfriendid;
+    public void setGrilfriendname(String grilfriendname) {
+        this.grilfriendname = grilfriendname;
     }
 }

@@ -15,7 +15,7 @@ public class LoverServiceImpl implements LoverService {
 	
 	@Override
 	public Lover getLover(Lover lover) {
-		return loverMapper.selectByPrimaryKey(lover.getId());
+		return loverMapper.selectByPrimaryKey(lover.getLovername());
 	}
 
 	@Override

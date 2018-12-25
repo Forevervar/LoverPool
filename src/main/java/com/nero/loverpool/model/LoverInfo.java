@@ -1,7 +1,7 @@
 package com.nero.loverpool.model;
 
 public class LoverInfo {
-    private String id;
+    private String lovername;
 
     private String nickname;
 
@@ -11,12 +11,12 @@ public class LoverInfo {
 
     private String sex;
 
-    public String getId() {
-        return id;
+    public String getLovername() {
+        return lovername;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setLovername(String lovername) {
+        this.lovername = lovername;
     }
 
     public String getNickname() {

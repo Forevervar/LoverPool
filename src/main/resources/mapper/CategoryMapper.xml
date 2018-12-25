@@ -4,9 +4,10 @@
   <resultMap id="BaseResultMap" type="com.nero.loverpool.model.Category">
     <id column="categoryID" jdbcType="VARCHAR" property="categoryid" />
     <result column="categoryName" jdbcType="VARCHAR" property="categoryname" />
+    <result column="LOVERNAME" jdbcType="VARCHAR" property="lovername" />
   </resultMap>
   <sql id="Base_Column_List">
-    categoryID, categoryName
+    categoryID, categoryName, LOVERNAME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -19,8 +20,10 @@
     where categoryID = #{categoryid,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.nero.loverpool.model.Category">
-    insert into category (categoryID, categoryName)
-    values (#{categoryid,jdbcType=VARCHAR}, #{categoryname,jdbcType=VARCHAR})
+    insert into category (categoryID, categoryName, LOVERNAME
+      )
+    values (#{categoryid,jdbcType=VARCHAR}, #{categoryname,jdbcType=VARCHAR}, #{lovername,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.nero.loverpool.model.Category">
     insert into category
@@ -31,6 +34,9 @@
       <if test="categoryname != null">
         categoryName,
       </if>
+      <if test="lovername != null">
+        LOVERNAME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="categoryid != null">
@@ -38,6 +44,9 @@
       </if>
       <if test="categoryname != null">
         #{categoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="lovername != null">
+        #{lovername,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -47,12 +56,16 @@
       <if test="categoryname != null">
         categoryName = #{categoryname,jdbcType=VARCHAR},
       </if>
+      <if test="lovername != null">
+        LOVERNAME = #{lovername,jdbcType=VARCHAR},
+      </if>
     </set>
     where categoryID = #{categoryid,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nero.loverpool.model.Category">
     update category
-    set categoryName = #{categoryname,jdbcType=VARCHAR}
+    set categoryName = #{categoryname,jdbcType=VARCHAR},
+      LOVERNAME = #{lovername,jdbcType=VARCHAR}
     where categoryID = #{categoryid,jdbcType=VARCHAR}
   </update>
 </mapper>
