@@ -20,7 +20,7 @@ public class LoverServiceImpl implements LoverService {
 
 	@Override
 	public int insertLover(Lover lover) {
-		return 0;
+		return loverMapper.insert(lover);
 	}
 
 }
