@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nero.loverpool.dao.LoverMapper">
+  <resultMap id="BaseResultMap" type="com.nero.loverpool.model.Lover">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="LOVERNAME" jdbcType="VARCHAR" property="lovername" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PWD, LOVERNAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lover
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lover
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nero.loverpool.model.Lover">
+    insert into lover (ID, PWD, LOVERNAME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{lovername,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nero.loverpool.model.Lover">
+    insert into lover
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="pwd != null">
+        PWD,
+      </if>
+      <if test="lovername != null">
+        LOVERNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null">
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="lovername != null">
+        #{lovername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nero.loverpool.model.Lover">
+    update lover
+    <set>
+      <if test="pwd != null">
+        PWD = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="lovername != null">
+        LOVERNAME = #{lovername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nero.loverpool.model.Lover">
+    update lover
+    set PWD = #{pwd,jdbcType=VARCHAR},
+      LOVERNAME = #{lovername,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nero.loverpool.dao.RelationShipMapper">
+  <resultMap id="BaseResultMap" type="com.nero.loverpool.model.RelationShip">
+    <id column="boyFriendID" jdbcType="VARCHAR" property="boyfriendid" />
+    <id column="grilFriendID" jdbcType="VARCHAR" property="grilfriendid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from relationship
+    where boyFriendID = #{boyfriendid,jdbcType=VARCHAR}
+      and grilFriendID = #{grilfriendid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nero.loverpool.model.RelationShip">
+    insert into relationship (boyFriendID, grilFriendID)
+    values (#{boyfriendid,jdbcType=VARCHAR}, #{grilfriendid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nero.loverpool.model.RelationShip">
+    insert into relationship
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="boyfriendid != null">
+        boyFriendID,
+      </if>
+      <if test="grilfriendid != null">
+        grilFriendID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="boyfriendid != null">
+        #{boyfriendid,jdbcType=VARCHAR},
+      </if>
+      <if test="grilfriendid != null">
+        #{grilfriendid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

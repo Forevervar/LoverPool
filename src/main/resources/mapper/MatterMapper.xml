@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nero.loverpool.dao.MatterMapper">
+  <resultMap id="BaseResultMap" type="com.nero.loverpool.model.Matter">
+    <id column="matterId" jdbcType="VARCHAR" property="matterid" />
+    <result column="matterName" jdbcType="VARCHAR" property="mattername" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="completeTime" jdbcType="TIMESTAMP" property="completetime" />
+    <result column="categoryID" jdbcType="VARCHAR" property="categoryid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    matterId, matterName, createTime, completeTime, categoryID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from matter
+    where matterId = #{matterid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from matter
+    where matterId = #{matterid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nero.loverpool.model.Matter">
+    insert into matter (matterId, matterName, createTime, 
+      completeTime, categoryID)
+    values (#{matterid,jdbcType=VARCHAR}, #{mattername,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{completetime,jdbcType=TIMESTAMP}, #{categoryid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nero.loverpool.model.Matter">
+    insert into matter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="matterid != null">
+        matterId,
+      </if>
+      <if test="mattername != null">
+        matterName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="completetime != null">
+        completeTime,
+      </if>
+      <if test="categoryid != null">
+        categoryID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="matterid != null">
+        #{matterid,jdbcType=VARCHAR},
+      </if>
+      <if test="mattername != null">
+        #{mattername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completetime != null">
+        #{completetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null">
+        #{categoryid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nero.loverpool.model.Matter">
+    update matter
+    <set>
+      <if test="mattername != null">
+        matterName = #{mattername,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completetime != null">
+        completeTime = #{completetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="categoryid != null">
+        categoryID = #{categoryid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where matterId = #{matterid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nero.loverpool.model.Matter">
+    update matter
+    set matterName = #{mattername,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      completeTime = #{completetime,jdbcType=TIMESTAMP},
+      categoryID = #{categoryid,jdbcType=VARCHAR}
+    where matterId = #{matterid,jdbcType=VARCHAR}
+  </update>
+</mapper>

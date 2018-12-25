@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nero.loverpool.dao.DictMapper">
+  <resultMap id="BaseResultMap" type="com.nero.loverpool.model.Dict">
+    <id column="dictKey" jdbcType="VARCHAR" property="dictkey" />
+    <id column="dictValue" jdbcType="VARCHAR" property="dictvalue" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from lover_i18n
+    where dictKey = #{dictkey,jdbcType=VARCHAR}
+      and dictValue = #{dictvalue,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.nero.loverpool.model.Dict">
+    insert into lover_i18n (dictKey, dictValue)
+    values (#{dictkey,jdbcType=VARCHAR}, #{dictvalue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nero.loverpool.model.Dict">
+    insert into lover_i18n
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictkey != null">
+        dictKey,
+      </if>
+      <if test="dictvalue != null">
+        dictValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictkey != null">
+        #{dictkey,jdbcType=VARCHAR},
+      </if>
+      <if test="dictvalue != null">
+        #{dictvalue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
