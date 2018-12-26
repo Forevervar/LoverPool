@@ -41,7 +41,6 @@ public class LoverController {
 			int i = loverService.insertLover(lover);
 			result = ResultUtil.success(i);
 		} catch (Exception e) {
-			logger.error("ERROR", e);
 			result = ResultUtil.fail(null, e.getMessage());
 		}
 		return result;

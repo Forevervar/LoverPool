@@ -23,7 +23,10 @@ public class LoverServiceImpl implements LoverService {
 
 	@Override
 	public int insertLover(Lover lover) throws Exception{
-		if(StringUtils.isEmpty(loverMapper.selectByPrimaryKey(lover.getLovername()))) {
+		if(StringUtils.isEmpty(lover.getLovername())) {
+			throw new LoverException(LoverConstant.ERROR_EMPTY_NAME, "UserName can not be null!");
+		}
+		if(!StringUtils.isEmpty(loverMapper.selectByPrimaryKey(lover.getLovername()))) {
 			throw new LoverException(LoverConstant.ERROR_DATA_EXIST, "UserName " + lover.getLovername() + " has been registered!");
 		}
 		return loverMapper.insert(lover);
