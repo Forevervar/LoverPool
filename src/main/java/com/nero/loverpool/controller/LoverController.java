@@ -1,5 +1,7 @@
 package com.nero.loverpool.controller;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nero.loverpool.model.Lover;
 import com.nero.loverpool.service.LoverService;
+import com.nero.loverpool.utils.ResultUtil;
 
 @RestController
 @RequestMapping("/lover")
@@ -28,10 +31,19 @@ public class LoverController {
 		return loverService.getLover(lover);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value="/info", method=RequestMethod.PUT)
 	@ResponseBody
-	private int creatLover(@RequestBody Lover lover) {
+	private Map creatLover(@RequestBody Lover lover) {
 		logger.info("creatLover Lover.!" + lover.getLovername());
-		return loverService.insertLover(lover);
+		Map<String, Object> result = null;
+		try {
+			int i = loverService.insertLover(lover);
+			result = ResultUtil.success(i);
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+			result = ResultUtil.fail(null, e.getMessage());
+		}
+		return result;
 	}
 }
